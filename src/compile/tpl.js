@@ -8,38 +8,25 @@ define(function(require) {
     constructor: Velocity
   };
 
-  var hasEnumBug = !({toString: 1}.propertyIsEnumerable('toString'));
+  var _ = require(underscore);
 
-  var keys = Object.keys || function (o) {
-    var result = [], p, i;
-
-    for (p in o) {
-      result.push(p);
-    }
-
-    if (hasEnumBug) {
-      for (i = enumProperties.length - 1; i >= 0; i--) {
-        p = enumProperties[i];
-        if (o.hasOwnProperty(p)) {
-          result.push(p);
-        }
-      }
-    }
-
-    return result;
-  };
+  function S4() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+  }
+  function guid() {
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+  }
 
   //api map
   var utils = {
-    forEach : S.each,
-    some    : S.some,
-    mixin   : S.mix,
-    guid    : S.guid,
-    isArray : S.isArray,
-    indexOf : S.indexOf,
-    // 1.2没有keys方法，考虑独立utils
-    keys    : keys,
-    now     : S.now
+    forEach : _.each,
+    some    : _.some,
+    mixin   : _.mixin,
+    guid    : guid,
+    isArray : _.isArray,
+    indexOf : _.indexOf,
+    keys    : _.keys,
+    now     : +new Date()
   };
 
   {helper}
