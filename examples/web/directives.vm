@@ -9,3 +9,4 @@
 <table>
   #tablerows( $cellbgcol $parts )
 </table>
+$jsdata $jsobject.get("dd")
