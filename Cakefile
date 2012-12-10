@@ -20,7 +20,17 @@ buildCompile = (tplfile)->
   tpl = tpl.replace '{helper}', helper
   tpl = tpl.replace '{velocity}', velocity
   fs.writeFileSync 'build/velocity/index.js', tpl
-  console.log 'build compile success, file at build/velocity/'
+  console.log 'build compile success, file at build/velocity/ by ' + tplfile
+
+buildParseFile = (tplfile)->
+  do buildParse
+  parseStr = (fs.readFileSync './src/parse/index.js').toString()
+
+  tpl = (fs.readFileSync tplfile).toString()
+  tpl = tpl.replace '{parseStr}', parseStr
+
+  fs.writeFileSync './build/velocity/parse.js', tpl
+  console.log 'build parse to build/velocity/parse.js by ' + tplfile
 
 buildParse = ()->
   comd = 'jison velocity.yy velocity.l && mv velocity.js index.js'
@@ -45,6 +55,11 @@ task 'build', 'build velocity for kissy', (options) ->
   });
   "
   console.log 'build parse to build/velocity/parse.js'
+
+#编译为CMD的模块
+task 'build-amd', 'build velocity for CMD', (options) ->
+  buildCompile "./src/compile/tpl.js"
+  buildParseFile "./src/parse/tpl.js"
 
 task 'runner', 'build runner', (options) ->
   files = fs.readdirSync 'tests'
