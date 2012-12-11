@@ -13,5 +13,5 @@ KISSY.config({
 
 KISSY.use('velocity/index, web/directives', function(S, Velocity, asts){
   var compile = new Velocity(asts);
-  S.all('body').html(compile.render());
+  S.all('body').html(compile.render({jsdata: 123, jsobject: {dd: 9}}));
 });

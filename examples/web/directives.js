@@ -149,7 +149,31 @@ KISSY.add(function(S){
       }
     ]
   },
-  "\n</table>\n"
+  "\n</table>\n",
+  {
+    "type": "references",
+    "id": "jsdata",
+    "leader": "$"
+  },
+  " ",
+  {
+    "type": "references",
+    "id": "jsobject",
+    "path": [
+      {
+        "type": "method",
+        "id": "get",
+        "args": [
+          {
+            "type": "string",
+            "value": "dd",
+            "isEval": true
+          }
+        ]
+      }
+    ],
+    "leader": "$"
+  }
 ];
 }, {
   requires: ["web/macro"]
